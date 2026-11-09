@@ -19,18 +19,31 @@ export default function Plantas({ alAbrir }) {
   const [errores, setErrores] = useState({ porCampo: {}, generales: [] });
   const [exito, setExito] = useState("");
   const [enviando, setEnviando] = useState(false);
+  const titulo = useRef(null);
+  const formulario = useRef(null);
   const primerCampo = useRef(null);
 
-  useEffect(() => {
+  function cargar() {
     listarPlantas()
       .then((lista) => {
         setPlantas(lista);
         setEstado("listo");
       })
       .catch(() => setEstado("error"));
+  }
+
+  useEffect(() => {
+    titulo.current?.focus();
+    cargar();
   }, []);
 
+  // Tras un error de validación, el foco va al primer campo marcado.
+  useEffect(() => {
+    formulario.current?.querySelector('[aria-invalid="true"]')?.focus();
+  }, [errores]);
+
   function cambiar(evento) {
+    setExito("");
     setDatos({ ...datos, [evento.target.name]: evento.target.value });
   }
 
@@ -45,8 +58,10 @@ export default function Plantas({ alAbrir }) {
         ...datos,
         intervaloRiegoDias: intervalo === "" ? undefined : Number(intervalo),
       });
-      setPlantas([...plantas, planta]);
-      setEstado("listo");
+      // Si la lista no cargó, no se inventa una lista con solo la planta nueva.
+      if (estado === "listo") {
+        setPlantas([...plantas, planta]);
+      }
       setDatos(VACIO);
       setExito(`Planta registrada: ${planta.nombre}.`);
     } catch (error) {
@@ -56,7 +71,7 @@ export default function Plantas({ alAbrir }) {
         setErrores({
           porCampo: {},
           generales: [
-            "No pudimos guardar la planta. Revisa que la API esté encendida y vuelve a intentarlo.",
+            "No pudimos conectar con el invernadero para guardar la planta. Vuelve a intentarlo.",
           ],
         });
       }
@@ -67,7 +82,9 @@ export default function Plantas({ alAbrir }) {
 
   return (
     <>
-      <h1>Plantas</h1>
+      <h1 ref={titulo} tabIndex={-1}>
+        Plantas
+      </h1>
 
       <section className="seccion" aria-labelledby="titulo-lista">
         <h2 id="titulo-lista" className="solo-lector">
@@ -77,10 +94,21 @@ export default function Plantas({ alAbrir }) {
           <p className="texto-secundario">Cargando plantas…</p>
         )}
         {estado === "error" && (
-          <Mensaje tipo="error">
-            No pudimos cargar las plantas. Revisa que la API esté encendida y
-            vuelve a intentarlo.
-          </Mensaje>
+          <div className="error-carga">
+            <Mensaje tipo="error">
+              No pudimos conectar con el invernadero. Vuelve a intentarlo.
+            </Mensaje>
+            <button
+              type="button"
+              className="boton-secundario"
+              onClick={() => {
+                setEstado("cargando");
+                cargar();
+              }}
+            >
+              Volver a intentarlo
+            </button>
+          </div>
         )}
         {estado === "listo" && plantas.length === 0 && (
           <ListaVacia
@@ -90,19 +118,28 @@ export default function Plantas({ alAbrir }) {
           />
         )}
         {estado === "listo" && plantas.length > 0 && (
-          <table className="tabla-plantas">
-            <thead>
-              <tr>
-                <th scope="col">Nombre</th>
-                <th scope="col">Especie</th>
-                <th scope="col">Ubicación</th>
-                <th scope="col">Riego cada</th>
+          // Roles explícitos: en el móvil la tabla pasa a display:block y Safari pierde su semántica.
+          <table className="tabla-plantas" role="table">
+            <thead role="rowgroup">
+              <tr role="row">
+                <th scope="col" role="columnheader">
+                  Nombre
+                </th>
+                <th scope="col" role="columnheader">
+                  Especie
+                </th>
+                <th scope="col" role="columnheader">
+                  Ubicación
+                </th>
+                <th scope="col" role="columnheader">
+                  Riego cada
+                </th>
               </tr>
             </thead>
-            <tbody>
+            <tbody role="rowgroup">
               {plantas.map((planta) => (
-                <tr key={planta._id}>
-                  <td data-etiqueta="Nombre">
+                <tr key={planta._id} role="row">
+                  <td data-etiqueta="Nombre" role="cell">
                     <a
                       href={`#planta-${planta._id}`}
                       className="enlace-planta"
@@ -114,9 +151,13 @@ export default function Plantas({ alAbrir }) {
                       {planta.nombre}
                     </a>
                   </td>
-                  <td data-etiqueta="Especie">{planta.especie}</td>
-                  <td data-etiqueta="Ubicación">{planta.ubicacion}</td>
-                  <td data-etiqueta="Riego cada">
+                  <td data-etiqueta="Especie" role="cell">
+                    {planta.especie}
+                  </td>
+                  <td data-etiqueta="Ubicación" role="cell">
+                    {planta.ubicacion}
+                  </td>
+                  <td data-etiqueta="Riego cada" role="cell">
                     {planta.intervaloRiegoDias}{" "}
                     {planta.intervaloRiegoDias === 1 ? "día" : "días"}
                   </td>
@@ -129,16 +170,16 @@ export default function Plantas({ alAbrir }) {
 
       <section className="seccion tarjeta" aria-labelledby="titulo-registro">
         <h2 id="titulo-registro">Registrar una planta</h2>
-        {exito && <Mensaje tipo="exito">{exito}</Mensaje>}
         {errores.generales.map((mensaje) => (
           <Mensaje key={mensaje} tipo="error">
             {mensaje}
           </Mensaje>
         ))}
-        <form onSubmit={enviar} noValidate>
+        <form ref={formulario} onSubmit={enviar} noValidate>
           <Campo
             id="nombre"
             etiqueta="Nombre"
+            required
             value={datos.nombre}
             onChange={cambiar}
             error={errores.porCampo.nombre}
@@ -147,6 +188,7 @@ export default function Plantas({ alAbrir }) {
           <Campo
             id="especie"
             etiqueta="Especie"
+            required
             value={datos.especie}
             onChange={cambiar}
             error={errores.porCampo.especie}
@@ -155,6 +197,7 @@ export default function Plantas({ alAbrir }) {
             id="ubicacion"
             etiqueta="Ubicación"
             ayuda="Por ejemplo: Mesa 2"
+            required
             value={datos.ubicacion}
             onChange={cambiar}
             error={errores.porCampo.ubicacion}
@@ -167,6 +210,7 @@ export default function Plantas({ alAbrir }) {
             inputMode="numeric"
             min="1"
             step="1"
+            required
             value={datos.intervaloRiegoDias}
             onChange={cambiar}
             error={errores.porCampo.intervaloRiegoDias}
@@ -175,6 +219,14 @@ export default function Plantas({ alAbrir }) {
             {enviando ? "Guardando…" : "Registrar planta"}
           </button>
         </form>
+        {/* Región viva siempre presente: así el lector anuncia el texto cuando cambia. */}
+        <div className="region-estado" role="status">
+          {exito && (
+            <Mensaje tipo="exito" role={null}>
+              {exito}
+            </Mensaje>
+          )}
+        </div>
       </section>
     </>
   );

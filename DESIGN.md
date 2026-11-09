@@ -111,14 +111,14 @@ Estas variables van en `client/src/styles/tokens.css` y se importan una sola vez
 
 | Componente | Cómo se ve | Reglas |
 |---|---|---|
-| **Botón primario** | Fondo `--color-primario`, texto blanco 700 | Altura mínima 44 px. Uno por pantalla |
+| **Botón primario** | Fondo `--color-primario`, texto blanco 700 | Altura mínima 44 px. Uno por pantalla. Por debajo de 640 px ocupa todo el ancho |
 | **Botón secundario** | Borde de 2 px `--color-primario`, fondo blanco, texto primario | Altura mínima 44 px. Para acciones de apoyo o cancelar |
 | **Campo** | Etiqueta visible arriba, borde `--color-borde-campo` | La ayuda va debajo. Con error: borde de 2 px `--color-error` y mensaje debajo con icono |
 | **Lista de plantas** | Tabla con encabezado `--color-primario`: nombre, especie, ubicación, riego cada | En el móvil, cada fila se convierte en una tarjeta con el nombre arriba |
 | **Historial de riegos** | Lista vertical, el más reciente primero | Fecha en negrita; cantidad y cuidador debajo, en `--color-texto-secundario` |
 | **Mensaje de carga** | Solo texto, por ejemplo «Cargando plantas…» | Sin animaciones ni spinners |
-| **Mensaje de éxito** | Fondo `--color-exito-fondo`, icono de visto | Nombra lo que se guardó |
-| **Mensaje de error** | Fondo `--color-error-fondo`, texto `--color-error`, icono | Dice qué pasó y qué hacer |
+| **Mensaje de éxito** | Fondo `--color-exito-fondo`, icono de visto | Nombra lo que se guardó. Va debajo del botón que lo provocó |
+| **Mensaje de error** | Fondo `--color-error-fondo`, texto `--color-error`, icono | Dice qué pasó y qué hacer. Si falla una carga, va seguido del botón secundario «Volver a intentarlo» |
 | **Lista vacía** | Borde discontinuo y una acción | Siempre ofrece el siguiente paso, por ejemplo «Registrar el primer riego» |
 
 ## Datos y textos de la API

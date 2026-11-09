@@ -19,10 +19,10 @@ export function fechaCorta(valor) {
   return `${fecha.getDate()} ${MESES[fecha.getMonth()]} ${fecha.getFullYear()}`;
 }
 
-// «AAAA-MM-DD» de hoy en hora local, para el máximo del campo de fecha.
-export function hoyIso() {
-  const hoy = new Date();
-  const mes = String(hoy.getMonth() + 1).padStart(2, "0");
-  const dia = String(hoy.getDate()).padStart(2, "0");
-  return `${hoy.getFullYear()}-${mes}-${dia}`;
+// «AAAA-MM-DD» en hora local (hoy por defecto), para los límites del campo de fecha.
+export function isoLocal(valor = new Date()) {
+  const fecha = new Date(valor);
+  const mes = String(fecha.getMonth() + 1).padStart(2, "0");
+  const dia = String(fecha.getDate()).padStart(2, "0");
+  return `${fecha.getFullYear()}-${mes}-${dia}`;
 }

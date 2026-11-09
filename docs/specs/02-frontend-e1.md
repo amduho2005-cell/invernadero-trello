@@ -9,6 +9,10 @@
 
 La app tiene dos pantallas y pasa de una a otra con estado de React, sin librería de rutas.
 
+- Al abrir el «Detalle de planta», la dirección pasa a `#planta-<id>` con `history.pushState`; el botón Atrás del navegador vuelve a «Plantas».
+- Al cambiar de pantalla, la página sube arriba del todo y el foco va al título (`<h1>`).
+- Recargar en el detalle lleva a «Plantas»: los datos de la planta llegan desde la lista.
+
 ### 1.1 «Plantas» (HU-1.5 y HU-1.1)
 
 - **Consume:** `GET /api/plantas` y `POST /api/plantas`.
@@ -19,28 +23,30 @@ La app tiene dos pantallas y pasa de una a otra con estado de React, sin librer�
 |---|---|
 | Cargando | «Cargando plantas…», solo texto |
 | Vacío | Bloque con borde discontinuo: «Todavía no hay plantas registradas.» y el foco va al formulario con «Registrar la primera planta» |
-| Error de conexión | Mensaje de error: «No pudimos cargar las plantas. Revisa que la API esté encendida y vuelve a intentarlo.» |
-| Éxito al registrar | Mensaje de éxito: «Planta registrada: <nombre>.» La planta aparece al final de la lista y el formulario se vacía |
+| Error de conexión | Mensaje de error: «No pudimos conectar con el invernadero. Vuelve a intentarlo.» y el botón secundario «Volver a intentarlo», que repite la carga |
+| Éxito al registrar | Mensaje de éxito debajo del botón: «Planta registrada: <nombre>.» La planta aparece al final de la lista (si la lista había cargado) y el formulario se vacía |
 
 ### 1.2 «Detalle de planta» (HU-1.4 y HU-1.2)
 
 - **Consume:** `GET /api/plantas/:id/riegos` y `POST /api/riegos`. Los datos de la planta llegan desde la lista; no se piden de nuevo.
-- **Contenido:** enlace «Volver a plantas», el nombre de la planta como título, sus datos (especie, ubicación, riego cada), el historial de riegos y el formulario «Registrar un riego» con los campos «Cantidad (ml)», Fecha (opcional, por defecto hoy) y Cuidador (opcional).
+- **Contenido, en este orden:** enlace «Volver a plantas», el nombre de la planta como título, sus datos (especie, ubicación, riego cada), el formulario «Registrar un riego» con los campos «Cantidad (ml)», Fecha (opcional, por defecto hoy, entre el día de registro de la planta y hoy) y Cuidador (opcional), y después el historial de riegos. El formulario va antes porque anotar un riego es la tarea frecuente.
 - **Historial:** lista vertical, el más reciente primero. Fecha en negrita en formato «28 oct 2026»; debajo, la cantidad en ml y el cuidador, o «sin cuidador».
 
 | Estado | Qué se muestra |
 |---|---|
 | Cargando | «Cargando riegos…» |
 | Vacío | «Esta planta todavía no tiene riegos.» con la acción «Registrar el primer riego» |
-| Planta inexistente (404) | «No encontramos esa planta. Puede que se haya borrado.» y el enlace para volver |
-| Error de conexión | «No pudimos cargar los riegos. Revisa que la API esté encendida y vuelve a intentarlo.» |
-| Éxito al registrar | «Riego guardado para <nombre>.» El riego aparece en el historial en su posición por fecha |
+| Planta inexistente (404) | Título «Planta no encontrada», «No encontramos esa planta. Puede que se haya borrado.» y el enlace para volver |
+| Error de conexión | «No pudimos conectar con el invernadero. Vuelve a intentarlo.» y el botón secundario «Volver a intentarlo», que repite la carga |
+| Éxito al registrar | Debajo del botón: «Riego guardado para <nombre>.» El riego aparece en el historial en su posición por fecha (si el historial había cargado) |
 
 ### 1.3 Errores de validación de la API
 
 - Cada elemento de `detalles` se muestra **debajo de su campo**, con icono y en `--color-error`, y el campo pasa a borde de 2 px `--color-error`.
 - Si un `campo` no corresponde a ningún campo del formulario (por ejemplo `planta` o `id`), el mensaje va arriba del formulario.
 - Se muestran los mensajes de la API tal como llegan; nunca códigos HTTP ni nombres técnicos.
+- Tras un error de validación, el foco va al primer campo con error.
+- El mensaje de éxito se anuncia a los lectores de pantalla y desaparece en cuanto el cuidador vuelve a escribir en el formulario.
 
 ## 2. Criterios de aceptación (se comprueban en el navegador)
 
@@ -52,9 +58,10 @@ La app tiene dos pantallas y pasa de una a otra con estado de React, sin librer�
 - **CA-F.6 · Historial vacío:** DADO una planta sin riegos, CUANDO abre su detalle, ENTONCES DEBE ver «Esta planta todavía no tiene riegos.» con la acción para registrar el primero.
 - **CA-F.7 · Registrar riego:** DADO el formulario con 500 ml y sin fecha, CUANDO pulsa «Registrar riego», ENTONCES DEBE ver «Riego guardado para <nombre>.» y el riego de hoy al inicio del historial, con «sin cuidador» si no lo indicó.
 - **CA-F.8 · Riego no válido:** DADO una cantidad de 0 o una fecha de mañana, CUANDO pulsa «Registrar riego», ENTONCES DEBE ver el mensaje de la API debajo del campo correspondiente, y el historial NO DEBE cambiar.
-- **CA-F.9 · API apagada:** DADO la API detenida, CUANDO abre la app, ENTONCES DEBE ver el mensaje de error de conexión, sin tecnicismos.
+- **CA-F.9 · API apagada:** DADO la API detenida, CUANDO abre la app, ENTONCES DEBE ver el mensaje de error de conexión, sin tecnicismos, y el botón «Volver a intentarlo»; CUANDO arranca la API y lo pulsa, ENTONCES DEBE ver la lista.
 - **CA-F.10 · Diseño:** todas las pantallas DEBEN usar solo variables de `tokens.css` para colores, espacios, radios y fuentes; los botones y enlaces de acción DEBEN medir al menos 44 px de alto; cada campo DEBE tener un `<label>` visible; el foco del teclado DEBE verse como un contorno de 3 px `--color-acento`; y DEBE haber un solo botón primario por pantalla.
-- **CA-F.11 · Móvil:** a 390 px de ancho, la lista DEBE verse como tarjetas y ninguna pantalla DEBE tener desplazamiento horizontal.
+- **CA-F.11 · Móvil:** a 390 px de ancho, la lista DEBE verse como tarjetas, el botón primario DEBE ocupar todo el ancho y ninguna pantalla DEBE tener desplazamiento horizontal.
+- **CA-F.12 · Navegación:** DADO el detalle de una planta abierto desde la lista, CUANDO pulsa Atrás en el navegador, ENTONCES DEBE volver a «Plantas» con el foco en su título.
 
 ## 3. Archivos
 
