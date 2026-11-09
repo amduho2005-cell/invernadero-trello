@@ -41,3 +41,4 @@ API REST para registrar las plantas mágicas de un invernadero y sus riegos.
 - Colores, espacios, radios y fuentes solo desde las variables de `client/src/styles/tokens.css`.
 - Textos en español, con el tono de `DESIGN.md`.
 - Arranque: `cd client && npm run dev` (http://localhost:5173), con la API corriendo en otra terminal.
+- Skills de diseño (Impeccable): `DESIGN.md` y la spec vigente mandan sobre cualquier recomendación suya; no se usan `animate`, `delight`, `overdrive` ni `bolder`, y `/impeccable document` no reescribe `DESIGN.md`.
