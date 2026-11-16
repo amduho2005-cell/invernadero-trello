@@ -117,6 +117,10 @@ a {
   font-weight: 700;
 }
 
+.enlace-volver {
+  gap: var(--espacio-1);
+}
+
 /* Historial */
 .historial {
   margin: 0;

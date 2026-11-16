@@ -43,3 +43,18 @@ export function IconoVisto() {
     </svg>
   );
 }
+
+export function IconoVolver() {
+  return (
+    <svg className="icono" viewBox="0 0 20 20" aria-hidden="true">
+      <path
+        d="M16 10H4.5M9 5l-5 5 5 5"
+        fill="none"
+        stroke="currentColor"
+        strokeWidth="2"
+        strokeLinecap="round"
+        strokeLinejoin="round"
+      />
+    </svg>
+  );
+}

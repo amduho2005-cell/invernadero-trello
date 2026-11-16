@@ -4,6 +4,7 @@ import { fechaCorta, isoLocal } from "../formato.js";
 import Campo from "../componentes/Campo.jsx";
 import ListaVacia from "../componentes/ListaVacia.jsx";
 import Mensaje from "../componentes/Mensaje.jsx";
+import { IconoVolver } from "../componentes/Iconos.jsx";
 
 const CAMPOS = ["cantidadMl", "fecha", "cuidador"];
 const VACIO = { cantidadMl: "", fecha: "", cuidador: "" };
@@ -20,6 +21,7 @@ export default function DetallePlanta({ planta, alVolver }) {
   const [exito, setExito] = useState("");
   const [enviando, setEnviando] = useState(false);
   const titulo = useRef(null);
+  const tituloHistorial = useRef(null);
   const formulario = useRef(null);
   const primerCampo = useRef(null);
 
@@ -98,7 +100,7 @@ export default function DetallePlanta({ planta, alVolver }) {
           alVolver();
         }}
       >
-        <span aria-hidden="true">←&nbsp;</span>
+        <IconoVolver />
         Volver a plantas
       </a>
       {/* Un único h1 para que el foco no se pierda si la planta resulta no existir. */}
@@ -193,10 +195,15 @@ export default function DetallePlanta({ planta, alVolver }) {
           </section>
 
           <section className="seccion" aria-labelledby="titulo-historial">
-            <h2 id="titulo-historial">Historial de riegos</h2>
-            {estado === "cargando" && (
-              <p className="texto-secundario">Cargando riegos…</p>
-            )}
+            <h2 id="titulo-historial" ref={tituloHistorial} tabIndex={-1}>
+              Historial de riegos
+            </h2>
+            {/* Región viva desde el montaje para que el lector anuncie la carga (CA-P.4). */}
+            <div role="status">
+              {estado === "cargando" && (
+                <p className="texto-secundario">Cargando riegos…</p>
+              )}
+            </div>
             {estado === "error" && (
               <div className="error-carga">
                 <Mensaje tipo="error">
@@ -206,6 +213,8 @@ export default function DetallePlanta({ planta, alVolver }) {
                   type="button"
                   className="boton-secundario"
                   onClick={() => {
+                    // El botón desaparece: el foco pasa al título para no perderse (CA-P.5).
+                    tituloHistorial.current?.focus();
                     setEstado("cargando");
                     cargar();
                   }}

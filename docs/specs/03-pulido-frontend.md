@@ -3,7 +3,7 @@
 - **Origen:** los hallazgos con decisión «entra» de [docs/diagnostico-diseno.md](../diagnostico-diseno.md): H-18 y H-27.
 - **Parte de:** la [spec 02](02-frontend-e1.md). Todos sus criterios siguen vigentes.
 - **Diseño:** [DESIGN.md](../../DESIGN.md).
-- **Estado:** pendiente.
+- **Estado:** implementada.
 
 ## 1. Cambios
 
@@ -14,7 +14,7 @@ El enlace «Volver a plantas» del «Detalle de planta» usa hoy el carácter «
 ### 1.2 Estados de carga anunciados (H-27)
 
 - «Cargando plantas…» y «Cargando riegos…» se muestran dentro de una región `role="status"` que existe desde que se monta la pantalla. Así, el lector de pantalla anuncia que empieza la carga.
-- Al pulsar «Volver a intentarlo», el botón desaparece mientras se carga. El foco pasa al título de la sección que se está cargando, para no perderse.
+- Al pulsar «Volver a intentarlo», el botón desaparece mientras se carga. Para que el foco no se pierda, pasa a un título visible: «Plantas» (el `<h1>`, porque el título de la lista solo existe para lectores de pantalla) o «Historial de riegos» en el detalle.
 
 ## 2. Criterios de aceptación
 
@@ -22,7 +22,7 @@ El enlace «Volver a plantas» del «Detalle de planta» usa hoy el carácter «
 - **CA-P.2 · El lector no lee la flecha** (H-18): DADO el «Detalle de planta» con un lector de pantalla, CUANDO el foco llega a «Volver a plantas», ENTONCES DEBE anunciarse «Volver a plantas, enlace», y NO DEBE anunciarse «flecha».
 - **CA-P.3 · Icono coherente** (H-18): DADO el enlace «Volver a plantas» a 390 px de ancho, CUANDO se mide, ENTONCES DEBE medir al menos 44 px de alto; el icono DEBE ser del mismo tamaño (18 px) y color que el resto del enlace; y NO DEBE usarse ninguna librería de iconos.
 - **CA-P.4 · Carga anunciada** (H-27): DADO una pantalla («Plantas» o «Detalle de planta») recién abierta, CUANDO empieza la carga, ENTONCES el texto «Cargando…» DEBE estar dentro de una región `role="status"` presente en el DOM desde el montaje, y NO DEBE crearse esa región junto con su texto.
-- **CA-P.5 · Reintento sin perder el foco** (H-27): DADO el error de conexión con el botón «Volver a intentarlo», CUANDO el cuidador lo pulsa con el teclado, ENTONCES el foco DEBE pasar al título de la sección que se está cargando, NO DEBE quedarse en el `body`, y DEBE anunciarse «Cargando…».
+- **CA-P.5 · Reintento sin perder el foco** (H-27): DADO el error de conexión con el botón «Volver a intentarlo», CUANDO el cuidador lo pulsa con el teclado, ENTONCES el foco DEBE pasar al título visible de lo que se está cargando («Plantas» o «Historial de riegos»), NO DEBE quedarse en el `body`, y DEBE anunciarse «Cargando…».
 
 ## 3. Verificación e implementación
 

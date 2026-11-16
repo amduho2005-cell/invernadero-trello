@@ -90,9 +90,12 @@ export default function Plantas({ alAbrir }) {
         <h2 id="titulo-lista" className="solo-lector">
           Lista de plantas
         </h2>
-        {estado === "cargando" && (
-          <p className="texto-secundario">Cargando plantas…</p>
-        )}
+        {/* Región viva desde el montaje para que el lector anuncie la carga (CA-P.4). */}
+        <div role="status">
+          {estado === "cargando" && (
+            <p className="texto-secundario">Cargando plantas…</p>
+          )}
+        </div>
         {estado === "error" && (
           <div className="error-carga">
             <Mensaje tipo="error">
@@ -102,6 +105,8 @@ export default function Plantas({ alAbrir }) {
               type="button"
               className="boton-secundario"
               onClick={() => {
+                // El botón desaparece: el foco pasa al título para no perderse (CA-P.5).
+                titulo.current?.focus();
                 setEstado("cargando");
                 cargar();
               }}
