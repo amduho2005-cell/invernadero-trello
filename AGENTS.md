@@ -42,3 +42,10 @@ API REST para registrar las plantas mágicas de un invernadero y sus riegos.
 - Textos en español, con el tono de `DESIGN.md`.
 - Arranque: `cd client && npm run dev` (http://localhost:5173), con la API corriendo en otra terminal.
 - Skills de diseño (Impeccable): `DESIGN.md` y la spec vigente mandan sobre cualquier recomendación suya; no se usan `animate`, `delight`, `overdrive` ni `bolder`, y `/impeccable document` no reescribe `DESIGN.md`.
+
+## Flujo de trabajo
+- Las tareas viven en el tablero de Trello **Invernadero Encantado**: Backlog → Por hacer → En curso → En revisión → Hecho.
+- Cada spec se implementa en su propia rama `spec/<número>-<slug>`, creada desde `main`. Nunca se hace commit directo en `main`.
+- Una tarjeta del Backlog sin spec no se implementa.
+- No hagas push ni abras PR a mano: al terminar una spec, el hook de revisión adversarial la revisa y, si aprueba, abre el PR.
+- Solo una persona mueve una tarjeta a «Hecho», después de revisar el PR.
