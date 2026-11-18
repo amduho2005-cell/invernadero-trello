@@ -5,3 +5,4 @@ node_modules/
 .impeccable/config.local.json
 .claude/skills/impeccable/scripts/bin/
 .claude/estado/
+capturas/
