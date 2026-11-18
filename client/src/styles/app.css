@@ -289,6 +289,67 @@ form {
   border-radius: var(--radio-tarjeta);
 }
 
+/* Riego rápido desde la lista (spec 07) */
+.celda-regar {
+  width: 1%;
+  white-space: nowrap;
+  text-align: right;
+}
+
+.celda-regar .region-estado:not(:empty) {
+  margin-top: var(--espacio-2);
+  white-space: normal;
+  text-align: left;
+}
+
+.etiqueta-regada {
+  display: inline-block;
+  margin-left: var(--espacio-2);
+  padding: 0 var(--espacio-2);
+  border: 1px solid var(--color-primario);
+  border-radius: var(--radio-tarjeta);
+  background: var(--color-exito-fondo);
+  color: var(--color-primario);
+  font-size: 14px;
+  font-weight: 700;
+}
+
+.tabla-plantas .fila-con-panel td {
+  background: var(--color-fondo);
+}
+
+.tabla-plantas .fila-panel td {
+  border-top: none;
+  background: var(--color-fondo);
+}
+
+.panel-riego .mensaje {
+  margin-bottom: var(--espacio-3);
+}
+
+.panel-riego-formulario {
+  flex-direction: row;
+  flex-wrap: wrap;
+  align-items: flex-end;
+  gap: var(--espacio-4);
+}
+
+.panel-riego-formulario .campo {
+  width: 200px;
+}
+
+.panel-riego-fecha {
+  min-height: 44px;
+  display: flex;
+  align-items: center;
+}
+
+.panel-riego-botones {
+  display: flex;
+  gap: var(--espacio-3);
+  margin-left: auto;
+}
+
 /* Móvil: cada fila de la tabla se convierte en una tarjeta */
 @media (max-width: 639px) {
   .tabla-plantas,
@@ -332,5 +393,60 @@ form {
 
   .boton-primario {
     align-self: stretch;
+  }
+
+  .tabla-plantas td.celda-regar::before,
+  .tabla-plantas .fila-panel td::before {
+    content: none;
+  }
+
+  .celda-regar {
+    width: auto;
+    padding-top: var(--espacio-3);
+  }
+
+  .celda-regar .boton-secundario,
+  .panel-riego-botones .boton-secundario {
+    width: 100%;
+  }
+
+  /* El panel se une a la tarjeta de su planta: una sola tarjeta. */
+  .tabla-plantas .fila-con-panel {
+    margin-bottom: 0;
+    border-bottom: none;
+    border-radius: var(--radio-tarjeta) var(--radio-tarjeta) 0 0;
+  }
+
+  .tabla-plantas .fila-con-panel td {
+    background: none;
+  }
+
+  .tabla-plantas .fila-panel {
+    padding-top: 0;
+    border-top: none;
+    border-radius: 0 0 var(--radio-tarjeta) var(--radio-tarjeta);
+  }
+
+  /* El recuadro gris es el formulario: los mensajes generales quedan encima. */
+  .tabla-plantas .fila-panel td {
+    padding: 0 0 var(--espacio-1);
+    background: none;
+  }
+
+  .panel-riego-formulario {
+    flex-direction: column;
+    align-items: stretch;
+    padding: var(--espacio-4);
+    border-radius: var(--radio-control);
+    background: var(--color-fondo);
+  }
+
+  .panel-riego-formulario .campo {
+    width: auto;
+  }
+
+  .panel-riego-botones {
+    flex-direction: column;
+    margin-left: 0;
   }
 }
