@@ -1,0 +1,23 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 390 572" width="390" height="572">
+<rect x="0" y="0" width="390" height="572" rx="0" fill="#FFFFFF"/>
+<rect x="0" y="0" width="390" height="48" rx="0" fill="#F2F2F2"/><text x="16" y="30" font-family="system-ui, sans-serif" font-size="14" font-weight="700" fill="#616161" text-anchor="start">Historial tras el riego · CA-1.8.4, CA-1.8.7</text><rect x="0" y="47" width="390" height="1" rx="0" fill="#D9D9D9"/>
+<text x="16" y="88" font-family="system-ui, sans-serif" font-size="16" font-weight="400" fill="#212121" text-anchor="start">← Volver a plantas</text>
+<text x="16" y="132" font-family="system-ui, sans-serif" font-size="24" font-weight="700" fill="#212121" text-anchor="start">Helecho Lunar</text>
+<text x="16" y="164" font-family="system-ui, sans-serif" font-size="14" font-weight="400" fill="#616161" text-anchor="start">Especie</text>
+<rect x="116" y="154" width="140" height="10" rx="2" fill="#D9D9D9"/>
+<text x="16" y="188" font-family="system-ui, sans-serif" font-size="14" font-weight="400" fill="#616161" text-anchor="start">Ubicación</text>
+<text x="116" y="188" font-family="system-ui, sans-serif" font-size="14" font-weight="400" fill="#212121" text-anchor="start">Mesa 2</text>
+<text x="16" y="212" font-family="system-ui, sans-serif" font-size="14" font-weight="400" fill="#616161" text-anchor="start">Riego cada</text>
+<text x="116" y="212" font-family="system-ui, sans-serif" font-size="14" font-weight="400" fill="#212121" text-anchor="start">2 días</text>
+<text x="16" y="272" font-family="system-ui, sans-serif" font-size="20" font-weight="700" fill="#212121" text-anchor="start">Registrar un riego</text>
+<rect x="16" y="288" width="358" height="10" rx="2" fill="#D9D9D9"/>
+<rect x="16" y="308" width="358" height="10" rx="2" fill="#D9D9D9"/>
+<rect x="16" y="328" width="358" height="10" rx="2" fill="#D9D9D9"/>
+<text x="16" y="392" font-family="system-ui, sans-serif" font-size="20" font-weight="700" fill="#212121" text-anchor="start">Historial de riegos</text>
+<rect x="8" y="412" width="374" height="60" rx="8" fill="#FFFFFF" stroke="#9E9E9E" stroke-width="1" stroke-dasharray="6 4"/>
+<text x="16" y="436" font-family="system-ui, sans-serif" font-size="16" font-weight="700" fill="#212121" text-anchor="start">18 nov 2026</text>
+<text x="16" y="458" font-family="system-ui, sans-serif" font-size="14" font-weight="400" fill="#616161" text-anchor="start">500 ml · sin cuidador</text>
+<text x="374" y="436" font-family="system-ui, sans-serif" font-size="14" font-weight="400" fill="#9E9E9E" text-anchor="end">riego nuevo</text>
+<text x="16" y="508" font-family="system-ui, sans-serif" font-size="16" font-weight="700" fill="#212121" text-anchor="start">15 nov 2026</text>
+<rect x="16" y="520" width="160" height="10" rx="2" fill="#D9D9D9"/>
+</svg>

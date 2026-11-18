@@ -334,6 +334,63 @@ Como cuidador, quiero corregir o borrar un riego mal registrado, para que un err
 | 4.2 Registrar riego (incluido olvidado) | HU-1.2 (absorbe HU-1.3) |
 | 4.4 Historial de riegos | HU-1.4 |
 | 4.5 Lista de plantas | HU-1.5 |
+| 4.2 Registrar riego, desde la lista | HU-1.8 |
+
+### HU-1.8 · Registrar un riego rápido desde la lista
+Como cuidador, quiero registrar un riego desde la lista de plantas sin abrir su detalle, para anotarlo en segundos mientras recorro las mesas.
+
+- **Estado:** refinada, sin spec. **No se implementa hasta tener spec en `docs/specs/`.**
+- **Alcance:** §4.2 (registrar un riego), con un atajo en la pantalla de HU-1.5. **Reglas:** las de HU-1.2 (D1, D2, D6, 6.4, 6.5).
+- **Endpoint:** el que ya existe, `POST /api/riegos`. No hace falta cambiar el backend.
+
+**Decisiones del cliente:**
+- El panel sugiere 500 ml, y el cuidador puede cambiar la cantidad.
+- La fecha es la de hoy y no se puede cambiar desde el panel. Para un riego olvidado con fecha pasada está el detalle (HU-1.2, CA-1.2.8).
+- No se pide cuidador; el riego queda «sin cuidador». Para indicarlo está el detalle.
+- Solo puede haber un panel abierto a la vez.
+- Al guardar, el panel se cierra y la fila muestra «Regada hoy» hasta que se recarga la lista.
+
+**Criterios de aceptación:**
+
+- **CA-1.8.1 · Panel abierto**
+  DADO la lista de plantas con «Helecho Lunar» registrada,
+  CUANDO el cuidador pulsa «Regar» en su fila,
+  ENTONCES se abre un panel dentro de esa fila con el campo «Cantidad (ml)» relleno con 500, el texto «Fecha: hoy» y los botones «Guardar riego» y «Cancelar». El foco pasa al campo de cantidad y no se pide cuidador.
+
+- **CA-1.8.2 · Un solo panel a la vez**
+  DADO el panel abierto en la fila de «Helecho Lunar»,
+  CUANDO el cuidador pulsa «Regar» en la fila de «Mandrágora»,
+  ENTONCES el panel de «Helecho Lunar» se cierra sin guardar nada y se abre el de «Mandrágora» con 500 ml. Pulsar «Cancelar» también cierra el panel sin registrar ningún riego.
+
+- **CA-1.8.3 · Guardando**
+  DADO el panel abierto con 500 ml,
+  CUANDO el cuidador pulsa «Guardar riego» y la API todavía no ha respondido,
+  ENTONCES el botón muestra «Guardando…» y queda desactivado, igual que el campo. Un segundo toque, o un doble toque, no envía otro riego: la planta gana un solo riego.
+
+- **CA-1.8.4 · Éxito**
+  DADO el panel abierto con 500 ml,
+  CUANDO el cuidador pulsa «Guardar riego» y la API lo acepta,
+  ENTONCES el panel se cierra; en la fila aparece, debajo del botón «Regar», el mensaje de éxito «Riego guardado para Helecho Lunar.», y la fila muestra «Regada hoy» hasta que se recarga la lista. En el detalle, el historial muestra ese riego primero, con la fecha de hoy, 500 ml y «sin cuidador».
+
+- **CA-1.8.5 · Error de validación junto al campo** (D2)
+  DADO el panel abierto,
+  CUANDO el cuidador cambia la cantidad a 0, o la deja vacía, y pulsa «Guardar riego»,
+  ENTONCES el panel sigue abierto con la cantidad escrita, el campo muestra borde de error y, debajo, con icono, «La cantidad de agua debe ser mayor que 0» (o «La cantidad de agua es obligatoria»). La fila no muestra «Regada hoy» y la planta no gana ningún riego. Lo mismo vale para 2,5 ml, con el mensaje de número entero de mililitros.
+
+- **CA-1.8.6 · Error de conexión**
+  DADO el panel abierto con 500 ml,
+  CUANDO el cuidador pulsa «Guardar riego» y la API no responde o falla,
+  ENTONCES el panel sigue abierto con los 500 ml, aparece arriba del panel un mensaje de error con icono que dice qué pasó y qué hacer (p. ej. «No pudimos guardar el riego. Revisa la conexión y vuelve a intentarlo.»), y el botón «Guardar riego» vuelve a estar activo para reintentar. La fila no muestra «Regada hoy».
+
+- **CA-1.8.7 · Uso en móvil a 390 px**
+  DADO la lista vista en un móvil de 390 px de ancho, donde cada planta es una tarjeta,
+  CUANDO el cuidador pulsa «Regar» en una tarjeta,
+  ENTONCES el panel se abre dentro de esa tarjeta, sin desplazamiento horizontal. El teclado es numérico, los botones «Guardar riego» y «Cancelar» ocupan todo el ancho y miden al menos 44 px de alto, y los mensajes de éxito y de error se leen sin salir de la tarjeta.
+
+**Para la spec:**
+- DESIGN.md permite un solo botón primario por pantalla, y «Registrar planta» ya lo es. Hay que decidir si «Regar» y «Guardar riego» son secundarios, o si el panel cuenta como una zona propia.
+- «Regada hoy» solo dura hasta recargar, porque la lista no trae el último riego. Si el cliente lo quiere persistente, hace falta que `GET /api/plantas` devuelva la fecha del último riego, y eso ya es trabajo de E2.
+- Sigue abierto el caso borde «dos riegos el mismo día» de HU-1.2: este atajo no lo impide, solo lo hace visible con «Regada hoy».
 
 ## Decisiones del cliente (2026-11-04)
 

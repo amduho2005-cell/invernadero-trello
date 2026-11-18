@@ -1,0 +1,35 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1280 652" width="1280" height="652">
+<rect x="0" y="0" width="1280" height="652" rx="0" fill="#FFFFFF"/>
+<rect x="0" y="0" width="1280" height="48" rx="0" fill="#F2F2F2"/><text x="16" y="30" font-family="system-ui, sans-serif" font-size="14" font-weight="700" fill="#616161" text-anchor="start">Lista · CA-1.8.1</text><rect x="0" y="47" width="1280" height="1" rx="0" fill="#D9D9D9"/>
+<text x="64" y="112" font-family="system-ui, sans-serif" font-size="24" font-weight="700" fill="#212121" text-anchor="start">Plantas</text>
+<rect x="64" y="144" width="1152" height="48" rx="0" fill="#616161"/>
+<text x="88" y="174" font-family="system-ui, sans-serif" font-size="16" font-weight="700" fill="#FFFFFF" text-anchor="start">Nombre</text>
+<text x="348" y="174" font-family="system-ui, sans-serif" font-size="16" font-weight="700" fill="#FFFFFF" text-anchor="start">Especie</text>
+<text x="648" y="174" font-family="system-ui, sans-serif" font-size="16" font-weight="700" fill="#FFFFFF" text-anchor="start">Ubicación</text>
+<text x="848" y="174" font-family="system-ui, sans-serif" font-size="16" font-weight="700" fill="#FFFFFF" text-anchor="start">Riego cada</text>
+<text x="1048" y="174" font-family="system-ui, sans-serif" font-size="16" font-weight="700" fill="#FFFFFF" text-anchor="start"></text>
+<rect x="64" y="192" width="1152" height="72" rx="0" fill="#FFFFFF" stroke="#D9D9D9" stroke-width="1"/>
+<text x="88" y="234" font-family="system-ui, sans-serif" font-size="16" font-weight="700" fill="#212121" text-anchor="start" text-decoration="underline">Helecho Lunar</text>
+<rect x="348" y="224" width="180" height="10" rx="2" fill="#D9D9D9"/>
+<text x="648" y="234" font-family="system-ui, sans-serif" font-size="16" font-weight="400" fill="#212121" text-anchor="start">Mesa 2</text>
+<text x="848" y="234" font-family="system-ui, sans-serif" font-size="16" font-weight="400" fill="#212121" text-anchor="start">2 días</text>
+<rect x="1053" y="207" width="138" height="42" rx="8" fill="#FFFFFF" stroke="#616161" stroke-width="2"/><text x="1122.0" y="234" font-family="system-ui, sans-serif" font-size="16" font-weight="700" fill="#616161" text-anchor="middle">Regar</text>
+<rect x="64" y="264" width="1152" height="72" rx="0" fill="#FFFFFF" stroke="#D9D9D9" stroke-width="1"/>
+<text x="88" y="306" font-family="system-ui, sans-serif" font-size="16" font-weight="700" fill="#212121" text-anchor="start" text-decoration="underline">Mandrágora</text>
+<rect x="348" y="296" width="180" height="10" rx="2" fill="#D9D9D9"/>
+<text x="648" y="306" font-family="system-ui, sans-serif" font-size="16" font-weight="400" fill="#212121" text-anchor="start">Mesa 3</text>
+<text x="848" y="306" font-family="system-ui, sans-serif" font-size="16" font-weight="400" fill="#212121" text-anchor="start">3 días</text>
+<rect x="1053" y="279" width="138" height="42" rx="8" fill="#FFFFFF" stroke="#616161" stroke-width="2"/><text x="1122.0" y="306" font-family="system-ui, sans-serif" font-size="16" font-weight="700" fill="#616161" text-anchor="middle">Regar</text>
+<rect x="64" y="336" width="1152" height="72" rx="0" fill="#FFFFFF" stroke="#D9D9D9" stroke-width="1"/>
+<text x="88" y="378" font-family="system-ui, sans-serif" font-size="16" font-weight="700" fill="#212121" text-anchor="start" text-decoration="underline">Rosa Nocturna</text>
+<rect x="348" y="368" width="180" height="10" rx="2" fill="#D9D9D9"/>
+<text x="648" y="378" font-family="system-ui, sans-serif" font-size="16" font-weight="400" fill="#212121" text-anchor="start">Mesa 5</text>
+<text x="848" y="378" font-family="system-ui, sans-serif" font-size="16" font-weight="400" fill="#212121" text-anchor="start">5 días</text>
+<rect x="1053" y="351" width="138" height="42" rx="8" fill="#FFFFFF" stroke="#616161" stroke-width="2"/><text x="1122.0" y="378" font-family="system-ui, sans-serif" font-size="16" font-weight="700" fill="#616161" text-anchor="middle">Regar</text>
+<text x="64" y="456" font-family="system-ui, sans-serif" font-size="20" font-weight="700" fill="#212121" text-anchor="start">Registrar una planta</text>
+<text x="64" y="488" font-family="system-ui, sans-serif" font-size="16" font-weight="700" fill="#212121" text-anchor="start">Nombre</text><rect x="64" y="496" width="264" height="44" rx="8" fill="#FFFFFF" stroke="#9E9E9E" stroke-width="1"/><text x="76" y="524" font-family="system-ui, sans-serif" font-size="16" font-weight="400" fill="#212121" text-anchor="start"></text>
+<text x="352" y="488" font-family="system-ui, sans-serif" font-size="16" font-weight="700" fill="#212121" text-anchor="start">Especie</text><rect x="352" y="496" width="264" height="44" rx="8" fill="#FFFFFF" stroke="#9E9E9E" stroke-width="1"/><text x="364" y="524" font-family="system-ui, sans-serif" font-size="16" font-weight="400" fill="#212121" text-anchor="start"></text>
+<text x="640" y="488" font-family="system-ui, sans-serif" font-size="16" font-weight="700" fill="#212121" text-anchor="start">Ubicación</text><rect x="640" y="496" width="264" height="44" rx="8" fill="#FFFFFF" stroke="#9E9E9E" stroke-width="1"/><text x="652" y="524" font-family="system-ui, sans-serif" font-size="16" font-weight="400" fill="#212121" text-anchor="start"></text>
+<text x="928" y="488" font-family="system-ui, sans-serif" font-size="16" font-weight="700" fill="#212121" text-anchor="start">Riego cada (días)</text><rect x="928" y="496" width="264" height="44" rx="8" fill="#FFFFFF" stroke="#9E9E9E" stroke-width="1"/><text x="940" y="524" font-family="system-ui, sans-serif" font-size="16" font-weight="400" fill="#212121" text-anchor="start"></text>
+<rect x="64" y="560" width="200" height="44" rx="8" fill="#616161"/><text x="164.0" y="588" font-family="system-ui, sans-serif" font-size="16" font-weight="700" fill="#FFFFFF" text-anchor="middle">Registrar planta</text>
+</svg>
